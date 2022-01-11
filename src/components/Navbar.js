@@ -9,9 +9,8 @@ function Navbar({ menu, setMenu }) {
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
   return isMobile ? (
-    menu ? (
-      <MobileMenu setMenu={setMenu} />
-    ) : (
+    <>
+      <MobileMenu setMenu={setMenu} menu={menu} />
       <div className="navbar" style={{ height: "8vh" }}>
         <div
           style={{
@@ -32,7 +31,7 @@ function Navbar({ menu, setMenu }) {
           ></GiHamburgerMenu>
         </div>
       </div>
-    )
+    </>
   ) : (
     <div className="navbar" style={{ height: "15vh" }}>
       <div
@@ -68,9 +67,9 @@ function Navbar({ menu, setMenu }) {
 
 export default Navbar;
 
-const MobileMenu = ({setMenu }) => {
+const MobileMenu = ({ menu, setMenu }) => {
   return (
-    <div className="mainBg">
+    <div className={`menuBg ${menu ? "open" : "close"}`}>
       <div
         style={{
           flexDirection: "column",
@@ -86,7 +85,7 @@ const MobileMenu = ({setMenu }) => {
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-            marginTop: "2rem",
+            paddingTop: "2rem",
           }}
         >
           <ImCross
