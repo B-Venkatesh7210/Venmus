@@ -1,0 +1,223 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --clr-black: hsl(220, 10%, 11%);
+  --clr-yellow: hsl(61, 80%, 65%);
+}
+
+.mainBg {
+  background: var(--clr-black);
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.navbar {
+  background: var(--clr-black);
+  position: fixed;
+
+  /* border-bottom: 0.1rem solid black;
+  box-shadow: 0 2px 20px 5px rgba(234, 237, 95, 0.5); */
+  height: 10vh;
+  width: 100%;
+  z-index: 100;
+}
+
+.navbarTabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 35%;
+
+  font-family: Bebas Neue;
+  color: white;
+  font-weight: lighter;
+  letter-spacing: 4px;
+  font-size: 36px;
+}
+
+.whiteText {
+  font-family: Circular Spotify Tx T;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 50px;
+  color: white;
+}
+
+.yellowText {
+  font-family: Circular Spotify Tx T;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 100px;
+  color: #eaed5f;
+}
+
+.blackText {
+  font-family: Circular Spotify Tx T;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 100px;
+  color: black;
+
+}
+.normalText {
+  font-family: "Exo", sans-serif;
+
+  color: white;
+  font-size: 30px;
+}
+
+.yellowButton {
+  width: 40%;
+  height: 8vh;
+  border-radius: 20px;
+  background-color: #eaed5f;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  font-family: Circular Spotify Tx T;
+  font-size: 30px;
+  color: black;
+}
+
+.guideContent {
+  margin-top: 30vh;
+  width: 100%;
+  height: 70vh;
+  padding: 0rem 5rem;
+  display: flex;
+  
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dp {
+  height: 15rem;
+  width: 15rem;
+  border-radius: 50%;
+  border: 5px solid white;
+  background-image: url("./images/dp.jpg");
+  background-size: 15rem;
+  background-repeat: no-repeat;
+}
+
+.navbarTab {
+  padding: 0rem -2rem;
+
+  transition: all linear 0.25s;
+}
+
+.navbarTab:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  border-bottom: 3px solid var(--clr-yellow);
+}
+
+.yellowBgBlur {
+  height: 402px;
+  width: 576px;
+  background: var(--clr-yellow);
+  border-radius: 15px;
+  box-shadow: 1px 1px 25px 5px #3d4022, inset 0px -10px 20px 0px #b5b74a ;
+  display: flex;
+  flex-direction: column;
+  /* transform: scale(0.3); */
+}
+
+.thumbnail {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.progressBar {
+  --bar-bg: #757630;
+  --seek-before-width: 40%;
+  --seek-before-color: black;
+  --knobby: var(--clr-black);
+  --selectedKnobby: #26c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);;
+  border-radius: 10px;
+  position: relative;
+  width: 120%;
+  height: 8px;
+  outline: none;
+}
+
+
+
+.progressBar::before {
+  content: '';
+  height: 8px;
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  margin: -1px 0 0 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.progressBar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: black;
+}
+
+// .menuBg{
+//   background: var(--clr-black);
+//   height: 0%;
+//   width: 100%;
+//   max-width: 400px;
+  
+//   z-index: 3;
+//   transition: all 4s linear;
+//   top: 0;
+//   right: -100%;
+//   visibility: hidden;
+//   opacity: 0;
+//   &.open{
+//     visibility: visible;
+//     height: 100%;
+//     width: 100%;
+//     right: 0;
+//     opacity: 1;
+//   }
+
+// }
+
+
+
+
+
+
+
+
+
