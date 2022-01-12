@@ -12,6 +12,7 @@
 
 :root {
   --clr-black: hsl(220, 10%, 11%);
+  --clr-black1: hsl(240, 35%, 8%);
   --clr-yellow: hsl(61, 80%, 65%);
 }
 
@@ -69,7 +70,6 @@
   font-weight: 900;
   font-size: 100px;
   color: black;
-
 }
 .normalText {
   font-family: "Exo", sans-serif;
@@ -97,7 +97,7 @@
   height: 70vh;
   padding: 0rem 5rem;
   display: flex;
-  
+
   justify-content: space-around;
   align-items: center;
 }
@@ -129,7 +129,7 @@
   width: 576px;
   background: var(--clr-yellow);
   border-radius: 15px;
-  box-shadow: 1px 1px 25px 5px #3d4022, inset 0px -10px 20px 0px #b5b74a ;
+  box-shadow: 1px 1px 25px 5px #3d4022, inset 0px -10px 20px 0px #b5b74a;
   display: flex;
   flex-direction: column;
   /* transform: scale(0.3); */
@@ -148,7 +148,7 @@
   --selectedKnobby: #26c9c3;
 
   appearance: none;
-  background: var(--bar-bg);;
+  background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
   width: 120%;
@@ -156,10 +156,8 @@
   outline: none;
 }
 
-
-
 .progressBar::before {
-  content: '';
+  content: "";
   height: 8px;
   width: var(--seek-before-width);
   background-color: var(--seek-before-color);
@@ -191,33 +189,21 @@
   background: black;
 }
 
-// .menuBg{
-//   background: var(--clr-black);
-//   height: 0%;
-//   width: 100%;
-//   max-width: 400px;
-  
-//   z-index: 3;
-//   transition: all 4s linear;
-//   top: 0;
-//   right: -100%;
-//   visibility: hidden;
-//   opacity: 0;
-//   &.open{
-//     visibility: visible;
-//     height: 100%;
-//     width: 100%;
-//     right: 0;
-//     opacity: 1;
-//   }
-
-// }
-
-
-
-
-
-
-
-
-
+.menuBg {
+  background: var(--clr-black);
+  height: 100%;
+  width: 100%;
+  z-index: 200;
+  transition: all 0.5s ease-in-out;
+  top: 0;
+  position: fixed;
+  right: -100%;
+  visibility: hidden;
+  opacity: 0.5;
+  &.open {
+    visibility: visible;
+    width: 100%;
+    right: 0;
+    opacity: 1;
+  }
+}
