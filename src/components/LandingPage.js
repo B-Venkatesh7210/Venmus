@@ -9,7 +9,7 @@ import { googleProvider } from "../authMethod";
 import { facebookProvider } from "../authMethod";
 
 const HomePage = () => {
-  const { isLoggedIn, user, handleOnClick, checkUserLogin } = useGlobalContext();
+  const { isLoggedIn, user, handleOnClick, Logout } = useGlobalContext();
 
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
@@ -41,42 +41,48 @@ const HomePage = () => {
             <span className="whiteText">Welcome To</span>
             <span className="yellowText">VENMUS</span>
             <span className="normalText">Login / Sign Up </span>
-            {isLoggedIn ? `Logged In ${user.providerData[0].displayName}` : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "start",
-                width: "80%",
-                marginTop: "2rem",
-              }}
-            >
+            {isLoggedIn.result === "Pending" ? (
+              <p className="whiteText">Loading Now </p>
+            ) : isLoggedIn.result === "Done" ? (
+              <p className="whiteText" onClick={Logout}>
+                {user
+                  ? `Logged In ${user.providerData[0].displayName}`
+                  : "Loading"}
+              </p>
+            ) : (
               <div
-                className="yellowButton"
-                onClick={() => handleOnClick(googleProvider)}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                  width: "80%",
+                  marginTop: "2rem",
+                }}
               >
-                <img
-                  alt="Google Logo"
-                  src={Google}
-                  style={{ maxHeight: "100%", maxWidth: "100%" }}
-                />
+                <div
+                  className="yellowButton"
+                  onClick={() => handleOnClick(googleProvider)}
+                >
+                  <img
+                    alt="Google Logo"
+                    src={Google}
+                    style={{ maxHeight: "100%", maxWidth: "100%" }}
+                  />
+                </div>
+                <div
+                  className="yellowButton"
+                  onClick={() => {
+                    handleOnClick(facebookProvider);
+                  }}
+                >
+                  <img
+                    alt="Facebook Logo"
+                    src={Facebook}
+                    style={{ maxHeight: "100%", maxWidth: "100%" }}
+                  />
+                </div>
               </div>
-              <div
-                className="yellowButton"
-                onClick={() => {
-                  // handleOnClick(facebookProvider)
-                  checkUserLogin()
-                }
-                }
-              >
-                <img
-                  alt="Facebook Logo"
-                  src={Facebook}
-                  style={{ maxHeight: "100%", maxWidth: "100%" }}
-                />
-              </div>
-            </div>
             )}
           </div>
         </div>
