@@ -1,43 +1,25 @@
 import React from "react";
-import AddComment from "./AddComment";
-import Lyrics from "./Lyrics";
 
-import Song from "./Song";
+import { useMediaQuery } from "react-responsive";
+
 import Body from "./Body";
+import SongsPageMobile from "./mobileScreens/SongsPageMobile";
+
+import SongsPageDesktop from "./SongsPageDesktop";
 
 function SongsPage() {
+
+  const isMobile = useMediaQuery({ maxWidth: "1200px" });
+
   return (
     <div className="mainBg" style={{ overflow: "scroll" }}>
       <Body>
-        <div
-          style={{
-            height: "120vh",
-            width: "100%",
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "90%",
-
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Song />
-            <Lyrics />
-          </div>
-          <AddComment />
-        </div>
+        {isMobile ? <SongsPageMobile/> : <SongsPageDesktop/>}
       </Body>
     </div>
   );
+  
+  
 }
 
 export default SongsPage;

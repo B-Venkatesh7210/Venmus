@@ -7,7 +7,7 @@ const Body = ({ children }) => {
   return (
     <>
       <Navbar menu={menu} setMenu={setMenu} />
-      {!menu && <div style={{ marginTop: "10vh" }}>{children}</div>}
+      {!menu && <div style={{ marginTop: "4vh" }}>{children}</div>}
     </>
   );
 };

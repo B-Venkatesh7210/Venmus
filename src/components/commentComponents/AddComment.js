@@ -1,21 +1,23 @@
 import React from "react";
-import User from "../images/user.png";
+import User from "../../images/user.png";
+import { useMediaQuery } from "react-responsive";
 
 import InputBase from "@mui/material/InputBase";
 import { AiOutlineDown } from "react-icons/ai";
 
-
 const AddComment = () => {
+  const isMobile = useMediaQuery({ maxWidth: "1200px" });
+
   return (
     <div
       style={{
-        height: "30vh",
+        height: isMobile ? "20vh" : "30vh",
         width: "100%",
 
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
-        padding: "1rem 2rem",
+        padding: isMobile ? "1rem 1rem" : "1rem 2rem",
       }}
     >
       <p className="whiteText" style={{ fontSize: "25px" }}>
@@ -24,8 +26,12 @@ const AddComment = () => {
       <div
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
-        <img alt="User Profile" src={User} style={{ width: "3rem" }} />
-        
+        <img
+          alt="User Profile"
+          src={User}
+          style={{ width: isMobile ? "2rem" : "3rem" }}
+        />
+
         <InputBase
           variant="standard"
           multiline
@@ -38,7 +44,13 @@ const AddComment = () => {
         />
         <div
           className="yellowButton"
-          style={{ width: "10%", fontSize: "24px", alignItems: "center" }}
+          style={{
+            width: "15%",
+            fontSize: isMobile ? "16px" : "24px",
+            alignItems: "center",
+            height: isMobile && "30px",
+            borderRadius: isMobile && "10px",
+          }}
         >
           Add
         </div>

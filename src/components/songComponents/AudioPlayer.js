@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import styles from "../AudioPlayer.module.css";
+import styles from "../../AudioPlayer.module.css";
 import { FaPlay } from "react-icons/fa"
 import { FaPause } from "react-icons/fa"
-import FaislaAudio from "../audio/Faisla.mp3"
 
-const AudioPlayer = () => {
+
+const AudioPlayer = ({songAudio}) => {
   // state
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -59,7 +59,7 @@ const AudioPlayer = () => {
 
   return (
     <div className={styles.audioPlayer}>
-      <audio ref={audioPlayer} src={FaislaAudio} preload="metadata"></audio>
+      <audio ref={audioPlayer} src={songAudio} preload="metadata"></audio>
       
       <button onClick={togglePlayPause} className={styles.playPause}>
         {isPlaying ? <FaPause color='black' /> : <FaPlay color='black' className={styles.play} />}

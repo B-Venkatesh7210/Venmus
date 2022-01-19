@@ -10,14 +10,17 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "audio-progress-bar": "^1.0.9",
+    "firebase": "^8.10.0",
     "lottie-web": "^5.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-responsive": "^9.0.0-beta.5",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "rive-react": "^0.0.30",
     "sass": "^1.47.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

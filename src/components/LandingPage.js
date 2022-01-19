@@ -1,81 +1,91 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Google from "../images/Google_black.png";
 import Facebook from "../images/Facebook_black.png";
 import { useMediaQuery } from "react-responsive";
-import Body from "./Body"
-
+import Body from "./Body";
+import { useGlobalContext } from "../context";
+import { googleProvider } from "../authMethod";
+import { facebookProvider } from "../authMethod";
 
 const HomePage = () => {
+  const { isLoggedIn, user, handleOnClick, checkUserLogin } = useGlobalContext();
+
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
   return (
     <div className="mainBg">
-      
       <Body>
-      <div
-        style={{
-          height: "100vh",
-          width: "100%",
-
-          padding: isMobile ? "20% 10%" : "0 10%",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "start",
+            height: "100vh",
+            width: "100%",
 
-            transform: isMobile && "scale(0.6)",
+            padding: isMobile ? "20% 10%" : "0 10%",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          <span className="whiteText">Welcome To</span>
-          <span className="yellowText">VENMUS</span>
-          <span className="normalText">Login / Sign Up </span>
           <div
             style={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               justifyContent: "space-between",
               alignItems: "start",
-              width: "80%",
-              marginTop: "2rem",
+
+              transform: isMobile && "scale(0.6)",
             }}
           >
-            <div className="yellowButton">
-              <img
-                alt="Google Logo"
-                src={Google}
-                style={{ maxHeight: "100%", maxWidth: "100%" }}
-              />
+            <span className="whiteText">Welcome To</span>
+            <span className="yellowText">VENMUS</span>
+            <span className="normalText">Login / Sign Up </span>
+            {isLoggedIn ? `Logged In ${user.providerData[0].displayName}` : (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "start",
+                width: "80%",
+                marginTop: "2rem",
+              }}
+            >
+              <div
+                className="yellowButton"
+                onClick={() => handleOnClick(googleProvider)}
+              >
+                <img
+                  alt="Google Logo"
+                  src={Google}
+                  style={{ maxHeight: "100%", maxWidth: "100%" }}
+                />
+              </div>
+              <div
+                className="yellowButton"
+                onClick={() => {
+                  // handleOnClick(facebookProvider)
+                  checkUserLogin()
+                }
+                }
+              >
+                <img
+                  alt="Facebook Logo"
+                  src={Facebook}
+                  style={{ maxHeight: "100%", maxWidth: "100%" }}
+                />
+              </div>
             </div>
-            <div className="yellowButton">
-              <img
-                alt="Google Logo"
-                src={Facebook}
-                style={{ maxHeight: "100%", maxWidth: "100%" }}
-              />
-            </div>
+            )}
           </div>
         </div>
-        
-      </div>
-
       </Body>
-      
     </div>
   );
 };
 
 const Guide = () => {
-  
-
   return (
     <div className="mainBg" style={{ height: "400vh" }}>
       <div className="guideContent">
