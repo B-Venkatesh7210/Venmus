@@ -5,7 +5,9 @@ import firebase from "./firebase_config";
 const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState({
+    result: "Pending",
+  });
   const [user, setUser] = useState();
 
   const handleOnClick = async (provider) => {
@@ -14,16 +16,41 @@ const UserProvider = ({ children }) => {
   };
 
   const checkUserLogin = () => {
-
-    console.log(firebase.auth().currentUser);
-
     setUser(firebase.auth().currentUser);
 
-    setIsLoggedIn(firebase.auth().currentUser ? true : false);
+    setIsLoggedIn(
+      firebase.auth().currentUser
+        ? {
+            result: "Done",
+          }
+        : {
+            result: "Not",
+          }
+    );
+  };
+
+  const Logout = () => {
+    console.log("logout");
+    firebase.auth().signOut();
+    setUser(firebase.auth().currentUser);
+
+    setIsLoggedIn(
+      firebase.auth().currentUser
+        ? {
+            result: "Done",
+          }
+        : {
+            result: "Not",
+          }
+    );
   };
 
   useEffect(() => {
-    checkUserLogin();
+    //checkUserLogin();
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) => checkUserLogin());
+    return () => unregisterAuthObserver();
   }, []);
 
   return (
@@ -35,6 +62,7 @@ const UserProvider = ({ children }) => {
         setUser,
         handleOnClick,
         checkUserLogin,
+        Logout,
       }}
     >
       {children}
