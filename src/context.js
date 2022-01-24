@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import socialMediaAuth from "./service/auth";
-import firebase from "./firebase_config";
+import socialMediaAuth from "./service/socialMediaAuth";
+import db,{ auth } from "./firebase_config";
 
 const UserContext = React.createContext();
 
@@ -16,10 +16,10 @@ const UserProvider = ({ children }) => {
   };
 
   const checkUserLogin = () => {
-    setUser(firebase.auth().currentUser);
+    setUser(auth.currentUser);
 
     setIsLoggedIn(
-      firebase.auth().currentUser
+      auth.currentUser
         ? {
             result: "Done",
           }
@@ -30,12 +30,11 @@ const UserProvider = ({ children }) => {
   };
 
   const Logout = () => {
-    console.log("logout");
-    firebase.auth().signOut();
-    setUser(firebase.auth().currentUser);
+    auth.signOut();
+    setUser(auth.currentUser);
 
     setIsLoggedIn(
-      firebase.auth().currentUser
+      auth.currentUser
         ? {
             result: "Done",
           }
@@ -46,10 +45,9 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    //checkUserLogin();
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) => checkUserLogin());
+    const unregisterAuthObserver = auth.onAuthStateChanged((user) =>
+      checkUserLogin()
+    );
     return () => unregisterAuthObserver();
   }, []);
 

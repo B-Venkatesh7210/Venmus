@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import VenmusYellow from "../logos/Venmus Logo Yellow.png";
 import User from "../images/user.png";
 import MobileMenu from "./mobileScreens/MobileMenu";
 import { useMediaQuery } from "react-responsive";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
+import { ClassNames } from "@emotion/react";
+import { border } from "@mui/system";
+import { useGlobalContext } from "../context";
 
 function Navbar({ menu, setMenu }) {
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
+  const [open, setOpen] = useState(false);
+
+  const { Logout, user } = useGlobalContext();
+
+  const handleOnClick = () => {
+    const prevValue = open;
+    setOpen(!prevValue);
+  };
+
+  const handleOnClick2 = () => {
+    Logout();
+    handleOnClick();
+
+  }
 
   return isMobile ? (
     <>
@@ -48,16 +66,75 @@ function Navbar({ menu, setMenu }) {
 
         <div className="navbarTabs">
           <div className="navbarTab">
-            <p style={{ marginBottom: "5px" }}>HOME</p>
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? "navbarTabActive" : ""
+              }
+              to="/"
+              style={{
+                marginBottom: "5px",
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              HOME
+            </NavLink>
           </div>
           <div className="navbarTab">
-            <p style={{ marginBottom: "5px" }}>SONGS</p>
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? "navbarTabActive" : ""
+              }
+              to="/songs"
+              style={{
+                marginBottom: "5px",
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              SONGS
+            </NavLink>
           </div>
           <div className="navbarTab">
-            <p style={{ marginBottom: "5px" }}>CONTACT</p>
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? "navbarTabActive" : ""
+              }
+              to="/contact"
+              style={{
+                marginBottom: "5px",
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              CONTACT
+            </NavLink>
           </div>
-          <div className="navbarTab">
-            <img alt="User Profile" src={User} style={{ width: "3rem" }} />
+
+          <div style={{cursor: "pointer"}}>
+
+            <img
+              alt="User Profile"
+              src={user ? user.photoURL ? user.photoURL : User : User}
+              style={{ width: "3rem", borderRadius: "50%" }}
+              onClick={user && handleOnClick}
+            />
+
+            {open && (
+              <div
+                className="dropdown"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="normalText" style={{ fontSize: "14px", cursor: "pointer"}} onClick={handleOnClick2}>
+                  Log Out
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
