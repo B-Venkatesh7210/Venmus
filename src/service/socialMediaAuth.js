@@ -11,7 +11,7 @@ const socialMediaAuth = (provider) => {
       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
       console.log(userDetail.displayName)
       
-      db.collection("usersData").add({
+      db.collection("usersData").doc(current.user.uid).set({
         name: userDetail.displayName,
         pic: userDetail.photoURL,
         id: current.user.uid,
@@ -19,7 +19,7 @@ const socialMediaAuth = (provider) => {
         phone: userDetail.phoneNumber
 
 
-      })
+      }, {merge: true})
 
       return current.user;
     })
