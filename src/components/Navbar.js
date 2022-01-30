@@ -23,13 +23,12 @@ function Navbar({ menu, setMenu }) {
   const handleOnClick2 = () => {
     Logout();
     handleOnClick();
-
-  }
+  };
 
   return isMobile ? (
     <>
       <MobileMenu setMenu={setMenu} menu={menu} />
-      <div className="navbar" style={{ height: "8vh" }}>
+      <div className="navbar" style={{ height: "12vh" }}>
         <div
           style={{
             display: "flex",
@@ -110,32 +109,36 @@ function Navbar({ menu, setMenu }) {
               CONTACT
             </NavLink>
           </div>
+          {user && (
+            <div style={{ cursor: "pointer" }}>
+              <img
+                alt="User Profile"
+                src={user ? (user.photoURL ? user.photoURL : User) : User}
+                style={{ width: "3rem", borderRadius: "50%" }}
+                onClick={user && handleOnClick}
+              />
 
-          <div style={{cursor: "pointer"}}>
-
-            <img
-              alt="User Profile"
-              src={user ? user.photoURL ? user.photoURL : User : User}
-              style={{ width: "3rem", borderRadius: "50%" }}
-              onClick={user && handleOnClick}
-            />
-
-            {open && (
-              <div
-                className="dropdown"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <p className="normalText" style={{ fontSize: "14px", cursor: "pointer"}} onClick={handleOnClick2}>
-                  Log Out
-                </p>
-              </div>
-            )}
-          </div>
+              {open && (
+                <div
+                  className="dropdown"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <p
+                    className="normalText"
+                    style={{ fontSize: "14px", cursor: "pointer" }}
+                    onClick={handleOnClick2}
+                  >
+                    Log Out
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

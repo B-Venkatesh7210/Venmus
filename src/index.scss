@@ -59,8 +59,10 @@
   font-family: Circular Spotify Tx T;
   font-style: normal;
   font-weight: 900;
-  font-size: 12px;
+  font-size: 24px;
+  width: 100%;
   color: white;
+  white-space: pre-line;
 }
 
 .yellowText {
@@ -99,10 +101,9 @@
   cursor: pointer;
 }
 
-.yellowButton:hover{
+.yellowButton:hover {
   transform: scale(1.05);
   transition: all 0.25s linear;
-  
 }
 
 .guideContent {
@@ -134,19 +135,17 @@
 }
 
 .navbarTab:hover {
-  
   transform: scale(1.1);
   border-bottom: 3px solid var(--clr-yellow);
 }
 
-.navbarTabActive{
+.navbarTabActive {
   font-family: Bebas Neue;
   color: white;
   font-weight: lighter;
   letter-spacing: 4px;
   font-size: 42px;
   border-bottom: 3px solid var(--clr-yellow);
-
 }
 
 .yellowBgBlur {
@@ -163,7 +162,6 @@
 .thumbnail {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  
 }
 
 .progressBar {
@@ -234,7 +232,7 @@
   }
 }
 
-.dropdown{
+.dropdown {
   position: absolute;
   right: 8px;
   width: 100px;
@@ -245,11 +243,36 @@
 }
 
 @keyframes dropdown {
-  0%{
+  0% {
     height: 0px;
   }
-  100%{
+  100% {
     height: 40px;
   }
-  
+}
+
+.formControl {
+  height: 30px;
+  width: 80%;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: black;
+  border-radius: 3px;
+  outline: 0.25px solid white;
+  padding: 10px;
+  color: white;
+}
+
+.socialHandle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  text-decoration: none;
+  transition: all linear 0.25s;
+}
+
+.socialHandle:hover{
+  transform: scale(1.15);
 }

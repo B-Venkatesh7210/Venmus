@@ -7,6 +7,12 @@ import Body from "./Body";
 import { useGlobalContext } from "../context";
 import { googleProvider } from "../authMethod";
 import { facebookProvider } from "../authMethod";
+import FacebookLogo from "../logos/Facebook_black.png";
+import InstagramLogo from "../logos/Instagram_black.png";
+import GmailLogo from "../logos/Mail_black.png";
+import YoutubeLogo from "../logos/Youtube_black.png";
+import LinkedinLogo from "../logos/LinkedIN_black.png";
+import DiscordLogo from "../logos/Discord_black.png";
 
 const HomePage = () => {
   const { isLoggedIn, user, handleOnClick, Logout } = useGlobalContext();
@@ -40,15 +46,16 @@ const HomePage = () => {
           >
             <span className="whiteText">Welcome To</span>
             <span className="yellowText">VENMUS</span>
-            <span className="normalText">Login / Sign Up </span>
+            {isLoggedIn.result === "Done" ? (
+              <></>
+            ) : (
+              <span className="normalText">Login / Sign Up </span>
+            )}
+
             {isLoggedIn.result === "Pending" ? (
               <p className="whiteText">Loading Now </p>
             ) : isLoggedIn.result === "Done" ? (
-              <p className="whiteText" onClick={Logout}>
-                {user
-                  ? `Logged In ${user.providerData[0].displayName}`
-                  : "Loading"}
-              </p>
+              <div></div>
             ) : (
               <div
                 style={{
@@ -463,6 +470,89 @@ const DevInfo = () => {
   );
 };
 
+const Footer = () => {
+  const isMobile = useMediaQuery({ maxWidth: "1200px" });
+
+  return (
+    <div
+      className="mainBg"
+      style={{
+        height: "10vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "black",
+        borderTop: "5px solid hsl(61, 80%, 65%)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          width: isMobile ? "70%" : "30%",
+        }}
+      >
+        <a
+          href="https://www.facebook.com/boddu.venkatesh.39/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            alt="Facebook"
+            src={FacebookLogo}
+            style={{ height: "35px" }}
+          ></img>
+        </a>
+        <a
+          href="https://www.instagram.com/_venmus_/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            alt="Instagram"
+            src={InstagramLogo}
+            style={{ height: "35px" }}
+          ></img>
+        </a>
+        {/* <a
+          href="https://www.instagram.com/_venmus_/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img alt="Gmail" src={GmailLogo} style={{ height: "35px" }}></img>
+        </a> */}
+        <a
+          href="https://www.youtube.com/channel/UC8gQROdn6l9mzX9Xx9yDQpg"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img alt="Youtube" src={YoutubeLogo} style={{ height: "35px" }}></img>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/venkatesh-venmus-b0b839121/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            alt="Linkedin"
+            src={LinkedinLogo}
+            style={{ height: "35px" }}
+          ></img>
+        </a>
+        <a
+          href="https://discordapp.com/channels/@me/_VENMUS#2026/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img alt="Discord" src={DiscordLogo} style={{ height: "35px" }}></img>
+        </a>
+      </div>
+    </div>
+  );
+};
+
 function LandingPage() {
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
@@ -471,6 +561,7 @@ function LandingPage() {
       <HomePage />
       {isMobile ? <GuideMobile /> : <Guide />}
       <DevInfo />
+      <Footer />
     </div>
   );
 }

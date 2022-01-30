@@ -53,15 +53,26 @@ const Comment = ({ comment }) => {
             borderRadius: "50%",
           }}
         />
+        <div style={{display: "flex", flexDirection: "column", alignItems: "start"}}>
+        <div
+          className="yellowText"
+          style={{ fontSize: isMobile ? "12px" : "18px", margin: "0rem 2rem" }}
+        >
+          {user && user.name}
+        </div>
         <div
           className="whiteText"
-          style={{ fontSize: "28px", margin: "0rem 2rem" }}
+          style={{ fontSize: isMobile ? "18px" : "28px", margin: "0rem 2rem" }}
         >
           {comment.comment}
+          
         </div>
+
+        </div>
+        
       </div>
 
-      <div className="normalText" style={{ fontSize: "18px" }}>
+      <div className="normalText" style={{ fontSize: "5px" }}>
         {/* {dateFormat(comment.time.toDate())} */}
         <Moment fromNow>
           {comment.time.toDate()}

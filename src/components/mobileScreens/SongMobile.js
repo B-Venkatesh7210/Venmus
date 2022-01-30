@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-
-import { BsDownload } from "react-icons/bs";
-import User from "../images/user.png";
-import AudioPlayer from "./songComponents/AudioPlayer";
+import React, {useState} from 'react';
 import { useMediaQuery } from "react-responsive";
-import dateFormat from "./utils/dateFormat";
-import { useGlobalContext } from "../context";
-import db from "../firebase_config";
-import Comments from "./Comments";
+
+import AudioPlayer from "../songComponents/AudioPlayer";
 import ReactMarkdown from "react-markdown";
 
-const Song = ({ song, id }) => {
-  const isMobile = useMediaQuery({ maxWidth: "1200px" });
+import { BsDownload } from "react-icons/bs";
+import db from "../../firebase_config";
+import { useGlobalContext } from "../../context";
+import User from "../../images/user.png";
+import dateFormat from "../utils/dateFormat";
+import Comments from '../Comments';
 
-  const { user } = useGlobalContext();
+const SongMobile = ({song,id}) => {
 
-  const [comment, setComment] = useState("");
+    const isMobile = useMediaQuery({ maxWidth: "1200px" });
+
+    const { user } = useGlobalContext();
+
+    const [comment, setComment] = useState("");
 
   const handleOnChange = (e) => {
     setComment(e.target.value);
@@ -23,102 +25,79 @@ const Song = ({ song, id }) => {
 
   return (
     <div
-      style={{
-        height: "150vh",
-        width: "100%",
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      width: "100%",
+      alignItems: "center",
+    }}
+  >
+    {/* Song Yellow Box */}
 
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "start",
-        alignItems: "center",
-      }}
+    <div
+      className="yellowBgBlur"
+      style={{ transform: isMobile && "scale(0.6)" }}
     >
+      <img alt="thumbnail" src={song.songPic} className="thumbnail" />
+      <div
+        style={{ height: "3px", width: "100%", background: "#757630" }}
+      ></div>
       <div
         style={{
-          width: "90%",
-          marginTop: "5rem",
-
+          height: "20%",
+          width: "100%",
+          padding: "1rem 0rem",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           alignItems: "center",
         }}
       >
-        {/* Song Yellow Box */}
-
-        <div
-          className="yellowBgBlur"
-          style={{ transform: isMobile && "scale(0.6)" }}
-        >
-          <img alt="thumbnail" src={song.songPic} className="thumbnail" />
-          <div
-            style={{ height: "3px", width: "100%", background: "#757630" }}
-          ></div>
-          <div
-            style={{
-              height: "20%",
-              width: "100%",
-              padding: "1rem 0rem",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
+        <AudioPlayer songAudio={song.songAudio} />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <p className="blackText" style={{ fontSize: "14px" }}>
+            Released On
+          </p>
+          <p
+            className="blackText"
+            style={{ fontSize: "18px", marginTop: "5px" }}
           >
-            <AudioPlayer songAudio={song.songAudio} />
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="blackText" style={{ fontSize: "14px" }}>
-                Released On
-              </p>
-              <p
-                className="blackText"
-                style={{ fontSize: "18px", marginTop: "5px" }}
-              >
-                {dateFormat(song.songDate.toDate())}
-              </p>
-            </div>
-            <a
-              href={song.songInstrumental}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                cursor: "pointer",
-                textDecoration: "none",
-              }}
-            >
-              <p className="blackText" style={{ fontSize: "14px" }}>
-                Instrumental
-              </p>
-              <BsDownload size={20} style={{ margin: "5px 0 3px 0" }} />
-            </a>
-          </div>
+            {dateFormat(song.songDate.toDate())}
+          </p>
         </div>
-
-        {/* Song Yellow Box */}
-
-        {/* Song Lyrics */}
-
         <div
           style={{
-            height: isMobile ? "40vh" : "80vh",
-            width: isMobile ? "90%" : "50%",
-            padding: isMobile ? "0rem" : "2rem",
             display: "flex",
             flexDirection: "column",
-
-            justifyContent: isMobile && "start",
+            alignItems: "center",
           }}
         >
-          <p
-            className="yellowText"
-            style={{ fontSize: isMobile ? "60px" : "80px" }}
-          >
-            {song.songName}
+          <p className="blackText" style={{ fontSize: "14px" }}>
+            Instrumental
           </p>
-          <div
+          <BsDownload size={20} style={{ margin: "5px 0 3px 0" }} />
+        </div>
+      </div>
+    </div>
+
+    {/* Song Yellow Box */}
+    {/* Song Lyrics */}
+
+    <div
+      style={{
+        height: isMobile ? "40vh" : "80vh",
+        width: isMobile ? "90%" : "50%",
+        padding: isMobile ? "0rem" : "2rem",
+        display: "flex",
+        flexDirection: "column",
+
+        justifyContent: isMobile && "start",
+      }}
+    >
+      <p className="yellowText" style={{ fontSize: isMobile && "60px" }}>
+        {song.songName}
+      </p>
+      <div
             style={{
               height: "80%",
               width: "100%",
@@ -133,16 +112,14 @@ const Song = ({ song, id }) => {
               {song.songLyrics.replace(/\+/g, "\n")}
             </ReactMarkdown>
           </div>
-        </div>
+    </div>
 
-        {/* Song Lyrics */}
-      </div>
+    {/* Song Lyrics */}
+    {/* Song Comments */}
 
-      {/* Song Comments */}
-
-      <div
+    <div
         style={{
-          height: isMobile ? "20vh" : "50vh",
+          height: isMobile ? "30vh" : "50vh",
           width: "100%",
 
           display: "flex",
@@ -204,8 +181,7 @@ const Song = ({ song, id }) => {
                 margin: "0rem 2rem",
                 color: "white",
                 background: "transparent",
-                height: "40px",
-                fontSize: "30px",
+                height: "30px",
                 border: "none",
                 outline: "none",
                 borderBottom: "2px solid white",
@@ -232,9 +208,9 @@ const Song = ({ song, id }) => {
         <Comments id={id} style={{ overflow: "scroll" }} />
       </div>
 
-      {/* Song Comments */}
-    </div>
+    {/* Song Comments */}
+  </div>
   );
 };
 
-export default Song;
+export default SongMobile;
