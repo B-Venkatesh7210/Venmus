@@ -65,18 +65,23 @@ const SongMobile = ({song,id}) => {
             {dateFormat(song.songDate.toDate())}
           </p>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <p className="blackText" style={{ fontSize: "14px" }}>
-            Instrumental
-          </p>
-          <BsDownload size={20} style={{ margin: "5px 0 3px 0" }} />
-        </div>
+        <a
+              href={song.songInstrumental}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+                textDecoration: "none",
+              }}
+            >
+              <p className="blackText" style={{ fontSize: "14px" }}>
+                Instrumental
+              </p>
+              <BsDownload size={20} style={{ margin: "5px 0 3px 0" }} />
+            </a>
       </div>
     </div>
 
@@ -94,7 +99,7 @@ const SongMobile = ({song,id}) => {
         justifyContent: isMobile && "start",
       }}
     >
-      <p className="yellowText" style={{ fontSize: isMobile && "60px" }}>
+      <p className="yellowText" style={{ fontSize: isMobile && "40px" }}>
         {song.songName}
       </p>
       <div
