@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { BsDownload } from "react-icons/bs";
 import User from "../images/user.png";
@@ -13,6 +13,8 @@ import ReactMarkdown from "react-markdown";
 const Song = ({ song, id }) => {
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
+  const [ifComment, setIfComment] = useState(false);
+
   const { user } = useGlobalContext();
 
   const [comment, setComment] = useState("");
@@ -21,10 +23,28 @@ const Song = ({ song, id }) => {
     setComment(e.target.value);
   };
 
+  useEffect(() => {
+    const getComments = async () => {
+      db.collection("songData")
+        .doc(id)
+        .collection("songComment")
+        .orderBy("time", "desc")
+        .onSnapshot((snapshot) => {
+         if(snapshot.docs.length>0)
+         {
+           setIfComment(true)
+         }
+        });
+    };
+    getComments();
+    
+  }, []);
+  
+
   return (
     <div
       style={{
-        height: "150vh",
+        height: ifComment ? "150vh" : "110vh",
         width: "100%",
 
         display: "flex",
@@ -142,7 +162,7 @@ const Song = ({ song, id }) => {
 
       <div
         style={{
-          height: isMobile ? "20vh" : "50vh",
+          height: isMobile ? ifComment ? "20vh" : "20vh" : ifComment ? "50vh" : "30vh",
           width: "100%",
 
           display: "flex",
@@ -205,7 +225,7 @@ const Song = ({ song, id }) => {
                 color: "white",
                 background: "transparent",
                 height: "40px",
-                fontSize: "30px",
+                fontSize: "24px",
                 border: "none",
                 outline: "none",
                 borderBottom: "2px solid white",

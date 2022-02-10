@@ -9,7 +9,7 @@ import { googleProvider } from "../authMethod";
 import { facebookProvider } from "../authMethod";
 import FacebookLogo from "../logos/Facebook_black.png";
 import InstagramLogo from "../logos/Instagram_black.png";
-import GmailLogo from "../logos/Mail_black.png";
+import VenmusLogoAnimation from "../logos/Venmus Logo Animation Gif.gif";
 import YoutubeLogo from "../logos/Youtube_black.png";
 import LinkedinLogo from "../logos/LinkedIN_black.png";
 import DiscordLogo from "../logos/Discord_black.png";
@@ -20,14 +20,15 @@ const HomePage = () => {
   const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
   return (
-    <div className="mainBg">
+    <div className="mainBg" style={{height: "120vh"}}>
       <Body>
         <div
           style={{
             height: "100vh",
             width: "100%",
+            marginLeft: isMobile? "0rem" : "5rem",
 
-            padding: isMobile ? "20% 10%" : "0 10%",
+            padding: isMobile ? "10% 10%" : "20% 10%",
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
             justifyContent: "space-between",
@@ -91,6 +92,18 @@ const HomePage = () => {
                 </div>
               </div>
             )}
+          </div>
+          <div>
+            {/* <p className="whiteText">Venmus Logo Animationnn</p> */}
+            <img
+              alt="Venmus Logo Animation"
+              src={VenmusLogoAnimation}
+              style={{
+                height: isMobile ? "30%" : "10%",
+                width: !isMobile && "100%",
+                
+              }}
+            />
           </div>
         </div>
       </Body>
