@@ -29,7 +29,7 @@ const Comments = ({ id }) => {
         <div
           style={{
             width: "100%",
-            height: isMobile? "10vh" : "20vh",
+            height: isMobile? "30vh" : "20vh",
             background: "black",
             display: "flex",
             flexDirection: "column",

@@ -8,7 +8,7 @@ const SongsPageDesktop = () => {
 
   useEffect(() => {
     const getSongs = async () => {
-      db.collection("songData").onSnapshot((snapshot) =>
+      db.collection("songData").orderBy("songDate", "desc").onSnapshot((snapshot) =>
         setSongs(
           snapshot.docs.map((doc) => {
             return { data: doc.data(), id: doc.id };

@@ -149,7 +149,7 @@ const Song = ({ song, id }) => {
               overflow: "scroll",
             }}
           >
-            <ReactMarkdown className="whiteText2">
+            <ReactMarkdown className="lyricsTextDesktop">
               {song.songLyrics.replace(/\+/g, "\n")}
             </ReactMarkdown>
           </div>

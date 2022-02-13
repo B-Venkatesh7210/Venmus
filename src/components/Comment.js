@@ -56,13 +56,13 @@ const Comment = ({ comment }) => {
         <div style={{display: "flex", flexDirection: "column", alignItems: "start"}}>
         <div
           className="yellowText"
-          style={{ fontSize: isMobile ? "12px" : "18px", margin: "0rem 2rem" }}
+          style={{ fontSize: isMobile ? "10px" : "18px", margin: "0rem 2rem" }}
         >
           {user && user.name}
         </div>
         <div
           className="whiteText"
-          style={{ fontSize: isMobile ? "18px" : "28px", margin: "0rem 2rem" }}
+          style={{ fontSize: isMobile ? "14px" : "28px", margin: "0rem 2rem" }}
         >
           {comment.comment}
           

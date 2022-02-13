@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useMediaQuery } from "react-responsive";
 
 import AudioPlayer from "../songComponents/AudioPlayer";
@@ -15,6 +15,8 @@ const SongMobile = ({song,id}) => {
 
     const isMobile = useMediaQuery({ maxWidth: "1200px" });
 
+    const [ifComment, setIfComment] = useState(false);
+
     const { user } = useGlobalContext();
 
     const [comment, setComment] = useState("");
@@ -23,9 +25,27 @@ const SongMobile = ({song,id}) => {
     setComment(e.target.value);
   };
 
+  useEffect(() => {
+    const getComments = async () => {
+      db.collection("songData")
+        .doc(id)
+        .collection("songComment")
+        .orderBy("time", "desc")
+        .onSnapshot((snapshot) => {
+         if(snapshot.docs.length>0)
+         {
+           setIfComment(true)
+         }
+        });
+    };
+    getComments();
+    
+  }, []);
+
   return (
     <div
     style={{
+      height: ifComment ? "130vh" : "110vh",
       display: "flex",
       flexDirection: "column",
       width: "100%",
@@ -113,7 +133,7 @@ const SongMobile = ({song,id}) => {
               overflow: "scroll",
             }}
           >
-            <ReactMarkdown className="whiteText2">
+            <ReactMarkdown className="lyricsTextMobile">
               {song.songLyrics.replace(/\+/g, "\n")}
             </ReactMarkdown>
           </div>
@@ -124,16 +144,16 @@ const SongMobile = ({song,id}) => {
 
     <div
         style={{
-          height: isMobile ? "30vh" : "50vh",
+          height: isMobile ? ifComment ? "30vh" : "30vh" : ifComment ? "50vh" : "30vh",
           width: "100%",
 
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-around",
+          justifyContent: "space-evenly",
           padding: isMobile ? "1rem 1rem" : "1rem 2rem",
         }}
       >
-        <p className="whiteText" style={{ fontSize: "30px" }}>
+        <p className="whiteText" style={{ fontSize: "24px", marginBottom: "0.5rem" }}>
           Add a comment
         </p>
         <div
@@ -141,6 +161,7 @@ const SongMobile = ({song,id}) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            marginBottom: "1rem"
           }}
         >
           <img
@@ -200,7 +221,7 @@ const SongMobile = ({song,id}) => {
                 outline: "none",
                 appearance: "none",
                 width: "10%",
-                fontSize: isMobile ? "16px" : "24px",
+                fontSize: isMobile ? "10px" : "24px",
                 alignItems: "center",
                 height: isMobile && "30px",
                 borderRadius: isMobile && "10px",

@@ -55,11 +55,21 @@
   font-size: 50px;
   color: white;
 }
-.whiteText2 {
+.lyricsTextDesktop {
   font-family: Circular Spotify Tx T;
   font-style: normal;
   font-weight: 900;
-  font-size: 24px;
+  font-size: 30px;
+  width: 100%;
+  color: white;
+  white-space: pre-line;
+}
+
+.lyricsTextMobile {
+  font-family: Circular Spotify Tx T;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
   width: 100%;
   color: white;
   white-space: pre-line;
