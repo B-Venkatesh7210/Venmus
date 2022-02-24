@@ -72,7 +72,7 @@ const Comment = ({ comment }) => {
         
       </div>
 
-      <div className="normalText" style={{ fontSize: "5px" }}>
+      <div className="normalText" style={{ fontSize: isMobile ? "5px" : "14px" }}>
         {/* {dateFormat(comment.time.toDate())} */}
         <Moment fromNow>
           {comment.time.toDate()}

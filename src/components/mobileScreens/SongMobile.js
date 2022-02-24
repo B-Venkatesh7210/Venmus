@@ -144,7 +144,7 @@ const SongMobile = ({song,id}) => {
 
     <div
         style={{
-          height: isMobile ? ifComment ? "30vh" : "30vh" : ifComment ? "50vh" : "30vh",
+          height: isMobile ? ifComment ? "28vh" : "30vh" : ifComment ? "50vh" : "30vh",
           width: "100%",
 
           display: "flex",
